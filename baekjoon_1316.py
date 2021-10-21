@@ -31,3 +31,4 @@ for _ in range(user_n):
     if is_group_word(user):
         result += 1
 print(result)
+
