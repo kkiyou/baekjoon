@@ -23,7 +23,7 @@ min_num = int(input())
 max_num = int(input())
 
 p_list = find_prime_list(max_num)
-prime_mm = [x for x in p_list if x >= min_num]
+prime_mm = [x for x in p_list if x > min_num]
 
 if len(prime_mm) < 1:
     print(-1)
