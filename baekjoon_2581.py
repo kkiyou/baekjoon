@@ -8,25 +8,26 @@
 #  100 이하 소수 = 25개
 #   10 이하 소수 = 4개
 
-def find_prime_list(num):
-    prime_list = list(range(2, num + 1))
-    i = 0
-    while i < len(prime_list):
-        temp_num = prime_list[i]
-        i += 1
-        for n in prime_list[i:]:
-            if n % temp_num == 0:
-                prime_list.remove(n)
-    return prime_list
+def find_prime_list(min_n, max_n):
+    stop_n = int(max_n ** 0.5)
+    tf_list = [True] * (max_n - 1)
+    for i in range(2, stop_n + 1):
+        if tf_list[i - 2] == True:
+            for j in range(i * 2, max_n + 1, i):
+                tf_list[j - 2] = False
+    prime_num = [
+        i for i in range(2, max_n + 1)
+            if (tf_list[i - 2] == True) & (i >= min_n)
+    ]
+    return prime_num
 
-min_num = int(input())
-max_num = int(input())
+min_n = int(input())
+max_n = int(input())
 
-p_list = find_prime_list(max_num)
-prime_mm = [x for x in p_list if x > min_num]
+p_list = find_prime_list(min_n, max_n)
 
-if len(prime_mm) < 1:
+if len(p_list) < 1:
     print(-1)
 else:
-    print(sum(prime_mm))
-    print(min(prime_mm))
+    print(sum(p_list))
+    print(min(p_list))
